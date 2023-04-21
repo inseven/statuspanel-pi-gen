@@ -1,6 +1,12 @@
 #!/bin/bash -e
 
-# Autoload the i2c device (enabled in stage1/00-boot-files/files/config.txt).
+# Enable I2C and SPI.
+cat <<EOF>> "${ROOTFS_DIR}/boot/config.txt"
+dtparam=i2c_arm=on
+dtparam=spi=on
+EOF
+
+# Autoload the I2C device (enabled in stage1/00-boot-files/files/config.txt).
 cat <<EOF>> "${ROOTFS_DIR}/etc/modules"
 i2c-dev
 EOF
